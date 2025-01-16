@@ -49,6 +49,10 @@ Before running this project, ensure you have:
 3. All **Node Devices** subscribed to the topic receive the command and execute the associated action (e.g., sending HTTP requests to a target URL).
 4. The Docker network ensures all components can communicate seamlessly within an isolated environment.
 
+## Botnet Architecture
+
+![image](ddos.drawio.png)
+
 ## Run Project
 
 1. Clone this repository:
@@ -59,19 +63,23 @@ cd ddos-simulation
 2. Run command to build docker
 
 ```bash
-git clone https://github.com/your-repo-name/ddos-simulation.git
-cd ddos-simulation
+docker compose up -d --build
 ```
 
 3. Start DDOS
 - Using postman or curl call api:
+
 POST: http://localhost:3000/command 
+
 Body: 
+```bash
 {
     "target":"https://metanest.com",
     "number_thread":10,
     "loop_count":100
 }
+```
+
 - The following parameters can be configured in the script:
 
 targetUrl: The target URL to simulate the attack (e.g., http://example.com).
@@ -92,3 +100,10 @@ Do not use this code to target real-world systems or infrastructure.
 The speed and effectiveness of this simulation depend on your machine's resources and network bandwidth.
 
 Avoid targeting high-traffic or production websites.
+
+
+
+Case 1:
+Tấn công ddos, và hệ thống defender chưa tiến hành limit thì chúng ta sẽ thấy server meta bị crask
+Case 2:
+Tấn công ddos, và hệ thống defender tiến hành ratelimit chống ddos
